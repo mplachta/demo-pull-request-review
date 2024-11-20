@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 from code_review_crew_for_github_pull_request.crew import CodeReviewCrewForGithubPullRequestCrew
+from code_review_crew_for_github_pull_request.tools.github_tools import FetchPRFilesTool
 
 # This main file is intended to be a way for your to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -12,9 +13,11 @@ def run():
     Run the crew.
     """
     inputs = {
-        'pr_patch_file_url': 'https://github.com/crewAIInc/crewAI/pull/1626.patch'
+        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/1627.patch',
+        'repo_name': 'crewAIInc/crewAI',
+        'files_changed': ''
     }
-    CodeReviewCrewForGithubPullRequestCrew().crew().kickoff(inputs=inputs)
+    CodeReviewCrewForGithubPullRequestCrew().kickoff(inputs=inputs)
 
 
 def train():
@@ -22,7 +25,8 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        'pr_patch_file_url': 'sample_value'
+        'pr_patch_url': 'sample_value',
+        'repo_name': 'crewAIInc/crewAI'
     }
     try:
         CodeReviewCrewForGithubPullRequestCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -45,7 +49,7 @@ def test():
     Test the crew execution and returns the results.
     """
     inputs = {
-        'pr_patch_file_url': 'sample_value'
+        'pr_patch_url': 'sample_value'
     }
     try:
         CodeReviewCrewForGithubPullRequestCrew().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
