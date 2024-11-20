@@ -1,21 +1,81 @@
 ---
-retrieve_modified_files_task:
-  description: Use the GitHub pull request patch URL {pr_patch_file_url} to gather the contents of
-    all modified files for analysis. Ensure that all relevant changes are included
-    for a comprehensive review.
-  expected_output: A patch file of modified files retrieved from the pull request
-    at {pr_patch_file_url}, ready for analysis.
-  async_execution: false
-  agent: code_retriever
-
 analyze_code_changes_task:
   description: Evaluate the retrieved code files for quality issues, adherence to
     coding standards, and potential improvements. Provide detailed feedback for each
-    modified file.
+    modified file. Using repository {repo_name}.
+
+    --- PR patch url
+    {pr_patch_url}
+
+    --- Code changes
+    {files_changed}
   expected_output: A detailed report summarizing the findings from the code analysis,
     including identified issues and suggestions for improvements. Each suggestion should provide a recommended
     improved code snipeet formatted with Markdown.
   async_execution: false
   agent: code_review_expert
+
+find_related_prs_task:
+  description: Search for and analyze previous pull requests that are related to the current changes.
+
+    For each related PR found
+    1. Fetch and analyze their content using the PR patch URL
+    2. Extract key discussions and code changes
+    3. Identify patterns and recurring issues
+    4. Document relevant decisions and their context
+
+    --- PR patch url
+    {pr_patch_url}
+
+    --- Code changes
+    {files_changed}
+  expected_output: A comprehensive analysis of related pull requests including
+    - Detailed content analysis of each related PR
+    - Key discussions and decisions from each PR
+    - Patterns identified across PRs
+    - Lessons learned that could inform the current code review
+  async_execution: false
   context:
-  - retrieve_modified_files_task
+  - analyze_code_changes_task
+  agent: quick_review_assistant
+
+analyze_related_files_task:
+  description: Using repository {repo_name}, identify and analyze
+    files that are functionally or logically related to the modified files.
+
+    For each related file identified
+    1. Fetch its current content
+    2. Analyze its relationship to the modified code
+    3. Look for potential impacts and dependencies
+    4. Review its recent change history
+
+    --- PR patch url
+    {pr_patch_url}
+
+    --- Code changes
+    {files_changed}
+  expected_output: A detailed analysis including
+    - Content and purpose of each related file
+    - How each file interacts with the modified code
+    - Potential impacts of the current changes
+    - Recent history and patterns from these files
+  async_execution: false
+  context:
+  - analyze_code_changes_task
+  agent: quick_review_assistant
+
+generate_review_comment_task:
+  description: Synthesize insights from all previous analyses into a comprehensive, well-structured
+    code review comment. Include code quality findings, historical context from related PRs,
+    implications for related files, and specific improvement suggestions.
+  expected_output: A detailed but to the point, markdown-formatted code review comment that includes
+    - Summary of key findings
+    - Specific code improvements with examples
+    - Links to historical context and learnings from related PRs
+    - Don't include '```markdown' in the output
+  async_execution: false
+  agent: quick_review_assistant
+  context:
+  - analyze_code_changes_task
+  - find_related_prs_task
+  - analyze_related_files_task
