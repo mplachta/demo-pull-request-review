@@ -1,0 +1,21 @@
+---
+retrieve_modified_files_task:
+  description: Use the GitHub pull request patch URL {pr_patch_file_url} to gather the contents of
+    all modified files for analysis. Ensure that all relevant changes are included
+    for a comprehensive review.
+  expected_output: A patch file of modified files retrieved from the pull request
+    at {pr_patch_file_url}, ready for analysis.
+  async_execution: false
+  agent: code_retriever
+
+analyze_code_changes_task:
+  description: Evaluate the retrieved code files for quality issues, adherence to
+    coding standards, and potential improvements. Provide detailed feedback for each
+    modified file.
+  expected_output: A detailed report summarizing the findings from the code analysis,
+    including identified issues and suggestions for improvements. Each suggestion should provide a recommended
+    improved code snipeet formatted with Markdown.
+  async_execution: false
+  agent: code_review_expert
+  context:
+  - retrieve_modified_files_task
