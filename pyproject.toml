@@ -5,7 +5,8 @@ description = "code_review_crew_for_github_pull_request using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<=3.13"
 dependencies = [
-    "crewai[tools] @ git+https://github.com/crewAIInc/crewAI.git@main",
+    "crewai>=0.95.0",
+    "crewai-tools>=0.32",
     "pygithub>=2.5.0",
 ]
 

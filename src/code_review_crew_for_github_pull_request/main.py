@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 import sys
+import warnings
+
 from code_review_crew_for_github_pull_request.crew import CodeReviewCrewForGithubPullRequestCrew
 from code_review_crew_for_github_pull_request.tools.github_tools import FetchPRFilesTool
+
+warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 # This main file is intended to be a way for your to run your
 # crew locally, so refrain from adding unnecessary logic into this file.
@@ -13,11 +17,11 @@ def run():
     Run the crew.
     """
     inputs = {
-        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/1627.patch',
+        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/1927.patch',
         'repo_name': 'crewAIInc/crewAI',
         'files_changed': ''
     }
-    CodeReviewCrewForGithubPullRequestCrew().kickoff(inputs=inputs)
+    CodeReviewCrewForGithubPullRequestCrew().crew().kickoff(inputs=inputs)
 
 
 def train():

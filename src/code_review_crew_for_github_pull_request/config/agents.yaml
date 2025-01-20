@@ -7,7 +7,7 @@ quick_review_assistant:
     reviews to identify common patterns and potential concerns, helping to streamline
     the overall review process.
   llm: gpt-4o-mini
-  verbose: true
+  verbose: false
 
 code_review_expert:
   role: Principal Software Engineer
@@ -17,4 +17,4 @@ code_review_expert:
     and quality assurance, you excel at identifying potential issues in code and providing
     constructive feedback to enhance the overall quality of the project.
   llm: anthropic/claude-3-5-sonnet-latest
-  verbose: true
+  verbose: false

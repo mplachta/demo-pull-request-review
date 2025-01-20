@@ -1,10 +1,10 @@
-from crewai.tools import BaseTool
-from typing import Type
-from pydantic import BaseModel, Field
-import requests
-from github import Github
-from typing import List, Optional
+from typing import List, Optional, Type
+
 import os
+import requests
+from crewai.tools import BaseTool
+from github import Auth, Github
+from pydantic import BaseModel, Field
 
 class FetchPRFilesInput(BaseModel):
     """Input schema for FetchPRFilesTool."""
@@ -17,6 +17,7 @@ class FetchPRFilesTool(BaseTool):
 
     def _run(self, pr_patch_url: str) -> str:
         response = requests.get(pr_patch_url)
+
         if response.status_code != 200:
             return f"Error fetching PR patch: {response.status_code}"
         return response.text
@@ -33,12 +34,21 @@ class FindRelatedPRsTool(BaseTool):
 
     def _run(self, repo_name: str, file_paths: List[str]) -> str:
         token = os.getenv('GITHUB_TOKEN')
-        g = Github(token)
+
+        if not token:
+            return "GitHub token not provided in environment or parameters. Proceed without searching for related PRs."
+
+        auth = Auth.Token(token)
+
+        g = Github(auth=auth)
         repo = g.get_repo(repo_name)
         related_prs = []
 
-        for pr in repo.get_pulls(state='closed'):
+        pull_requests = repo.get_pulls(state='closed')
+
+        for pr in pull_requests[:20]:  # Limit to maximum of 20 pull requests
             files = pr.get_files()
+
             if any(f.filename in file_paths for f in files):
                 related_prs.append({
                     'number': pr.number,
@@ -46,7 +56,7 @@ class FindRelatedPRsTool(BaseTool):
                     'url': pr.html_url,
                     'body': pr.body
                 })
-
+        
         return related_prs[:5]  # Return top 5 related PRs
 
 class RelatedFilesInput(BaseModel):
@@ -61,9 +71,13 @@ class FindRelatedFilesTool(BaseTool):
 
     def _run(self, repo_name: str, file_paths: List[str]) -> str:
         token = os.getenv('GITHUB_TOKEN')
+
         if not token:
-            raise ValueError("GitHub token not provided in environment or parameters")
-        g = Github(token)
+            return "GitHub token not provided in environment or parameters. Proceed without searching for related files."
+        
+        auth = Auth.Token(token)
+        
+        g = Github(auth=auth)
         repo = g.get_repo(repo_name)
         related_files = []
 
