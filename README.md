@@ -1,16 +1,25 @@
-# CodeReviewCrewForGithubPullRequest Crew
+# Code Review Crew for GitHub Pull Request
 
-Welcome to the CodeReviewCrewForGithubPullRequest Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Welcome to the CodeReviewCrewForGithubPullRequest project, powered by [crewAI](https://crewai.com). This project sets up a multi-agent AI system designed to perform comprehensive code reviews for GitHub pull requests.
+
+## Project Overview
+
+This crew consists of two main agents:
+
+1. **Quick Review Assistant**: Provides rapid initial assessments of code changes and identifies basic patterns and potential issues in pull requests.
+2. **Code Review Expert**: Analyzes code changes in detail and provides comprehensive review reports highlighting code quality issues and suggestions for improvements.
+
+## Key Features
+
+- Automated code analysis for GitHub Pull Requests
+- Identification of related files and potential impacts
+- Analysis of historically related Pull Requests
+- Generation of detailed, markdown-formatted code review comments
 
 ## Installation
 
-Ensure you have Python >=3.10 <=3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
-
-First, if you haven't already, install uv:
-
-```bash
-pip install uv
-```
+Ensure you have Python >=3.10 <=3.13 installed. This project uses [UV](https://docs.astral.sh/uv/) for dependency management.
+Follow the [installation guide for CrewAI](https://docs.crewai.com/docs/installation).
 
 Next, navigate to your project directory and install the dependencies:
 
@@ -18,37 +27,39 @@ Next, navigate to your project directory and install the dependencies:
 ```bash
 crewai install
 ```
-### Customizing
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+* Add your `OPENAI_API_KEY` to the `.env` file as we use gpt-4o-mini to perform fetching PRs, files, etc.
+* Add your `ANTHROPIC_API_KEY` to the `.env` file - this project uses Anthropic's models for code review.
 
-- Modify `src/code_review_crew_for_github_pull_request/config/agents.yaml` to define your agents
-- Modify `src/code_review_crew_for_github_pull_request/config/tasks.yaml` to define your tasks
-- Modify `src/code_review_crew_for_github_pull_request/crew.py` to add your own logic, tools and specific args
-- Modify `src/code_review_crew_for_github_pull_request/main.py` to add custom inputs for your agents and tasks
+## Configuration
 
-## Running the Project
+- `src/code_review_crew_for_github_pull_request/config/agents.yaml`: Define agent roles and configurations
+- `src/code_review_crew_for_github_pull_request/config/tasks.yaml`: Specify tasks for code review process
+- `src/code_review_crew_for_github_pull_request/crew.py`: Customize logic, tools, and arguments
+- `src/code_review_crew_for_github_pull_request/main.py`: Add custom inputs for agents and tasks
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+## Usage
+
+Run the code review crew:
 
 ```bash
-$ crewai run
+crewai run
 ```
 
-This command initializes the code_review_crew_for_github_pull_request Crew, assembling the agents and assigning them tasks as defined in your configuration.
+This command initializes the crew, assigns tasks, and generates a comprehensive code review report.
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+## Task Workflow
 
-## Understanding Your Crew
-
-The code_review_crew_for_github_pull_request Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+1. **Analyze Code Changes**: Evaluate modified files for quality issues and suggest improvements
+2. **Find Related PRs**: Search for and analyze previous related pull requests
+3. **Analyze Related Files**: Identify and analyze files functionally or logically related to the changes
+4. **Generate Review Comment**: Synthesize insights into a comprehensive code review comment
 
 ## Support
 
-For support, questions, or feedback regarding the CodeReviewCrewForGithubPullRequest Crew or crewAI.
+For support or questions:
 - Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
+- Check our [GitHub ](https://github.com/crewAIInc)
 - [Chat with our docs](https://chatg.pt/DWjSBZn)
 
-Let's create wonders together with the power and simplicity of crewAI.
+Leverage the power of AI for efficient and thorough code reviews with this crew!
