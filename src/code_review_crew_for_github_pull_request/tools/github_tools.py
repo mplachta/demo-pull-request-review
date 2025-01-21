@@ -33,7 +33,7 @@ class FindRelatedPRsTool(BaseTool):
     args_schema: Type[BaseModel] = RelatedPRsInput
 
     def _run(self, repo_name: str, file_paths: List[str]) -> str:
-        token = os.getenv('GITHUB_TOKEN')
+        token = os.getenv('GITHUB_TOKEN_CODEREVIEW')
 
         if not token:
             return "GitHub token not provided in environment or parameters. Proceed without searching for related PRs."
@@ -70,7 +70,7 @@ class FindRelatedFilesTool(BaseTool):
     args_schema: Type[BaseModel] = RelatedFilesInput
 
     def _run(self, repo_name: str, file_paths: List[str]) -> str:
-        token = os.getenv('GITHUB_TOKEN')
+        token = os.getenv('GITHUB_TOKEN_CODEREVIEW')
 
         if not token:
             return "GitHub token not provided in environment or parameters. Proceed without searching for related files."

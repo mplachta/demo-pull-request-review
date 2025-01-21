@@ -2,7 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task, before_kickoff
 from crewai_tools import ScrapeWebsiteTool
-from .tools.github_tools import (
+from code_review_crew_for_github_pull_request.tools.github_tools import (
     FetchPRFilesTool,
     FindRelatedFilesTool,
     FindRelatedPRsTool,
