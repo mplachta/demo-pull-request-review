@@ -530,7 +530,7 @@ name = "click"
 version = "8.1.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de", size = 336121 }
 wheels = [
@@ -542,15 +542,13 @@ name = "code-review-crew-for-github-pull-request"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "crewai" },
-    { name = "crewai-tools" },
+    { name = "crewai", extra = ["tools"] },
     { name = "pygithub" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "crewai", specifier = ">=0.95.0" },
-    { name = "crewai-tools", specifier = ">=0.32" },
+    { name = "crewai", extras = ["tools"], specifier = "==0.98.0" },
     { name = "pygithub", specifier = ">=2.5.0" },
 ]
 
@@ -598,7 +596,7 @@ wheels = [
 
 [[package]]
 name = "crewai"
-version = "0.95.0"
+version = "0.98.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "appdirs" },
@@ -624,9 +622,14 @@ dependencies = [
     { name = "tomli-w" },
     { name = "uv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/62/4e/325fd0032b065dfbdeb2a366ac6d1e35b2e5b4530eb4f3f15f84f7aad406/crewai-0.95.0.tar.gz", hash = "sha256:31c7c6405e7658f177fac82c47b208d2a9c4bc82ddcc622ba2dc8c6e9963eb17", size = 7753264 }
+sdist = { url = "https://files.pythonhosted.org/packages/ec/3d/50e385db1fba91830b37fff0eff39613f09111332470eae73fa7c46df3a0/crewai-0.98.0.tar.gz", hash = "sha256:3aaf2c30781d4841d0a521b28d9f53d0ea483660885e9999211636fd774bef33", size = 7751208 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/fc/286f4af720bccd0337bcb6af61fb68018d45187a0f985419dd7e42af86c4/crewai-0.95.0-py3-none-any.whl", hash = "sha256:e8d65d74a5ca43e1a353d32cca1fe56a06846bf08419bf2bf270e5007379f787", size = 211939 },
+    { url = "https://files.pythonhosted.org/packages/f8/9a/6ce2ef62575357b685e877aa77a35774551d0e3da88cd5d7cce51caf488f/crewai-0.98.0-py3-none-any.whl", hash = "sha256:048c5373ca7d85bc254c777a90c8f165d3183520bee0113180d46ce836fdf700", size = 231338 },
+]
+
+[package.optional-dependencies]
+tools = [
+    { name = "crewai-tools" },
 ]
 
 [[package]]
@@ -1975,24 +1978,24 @@ wheels = [
 
 [[package]]
 name = "litellm"
-version = "1.53.3"
+version = "1.57.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
     { name = "click" },
+    { name = "httpx" },
     { name = "importlib-metadata" },
     { name = "jinja2" },
     { name = "jsonschema" },
     { name = "openai" },
     { name = "pydantic" },
     { name = "python-dotenv" },
-    { name = "requests" },
     { name = "tiktoken" },
     { name = "tokenizers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/32/83/95116a265861306ded93a776c5de29b8531a8e1700d11a22502ce0f9aa62/litellm-1.53.3.tar.gz", hash = "sha256:42feb755c8887522ac913a9c04ef2d4242efd821c2ee2d3ad59097047e80f3ca", size = 6174949 }
+sdist = { url = "https://files.pythonhosted.org/packages/1a/9a/115bde058901b087e7fec1bed4be47baf8d5c78aff7dd2ffebcb922003ff/litellm-1.57.4.tar.gz", hash = "sha256:747a870ddee9c71f9560fc68ad02485bc1008fcad7d7a43e87867a59b8ed0669", size = 6304427 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/62/48/73829396551c8c35c754d7dacd7e70ef2fdee82c72b22310643255e51b27/litellm-1.53.3-py3-none-any.whl", hash = "sha256:b4bda8efa1d12fe98086c8e84342b92fd499a808017e4d642c43aa784f451b13", size = 6427031 },
+    { url = "https://files.pythonhosted.org/packages/9f/72/35c8509cb2a37343c213b794420405cbef2e1fdf8626ee981fcbba3d7c5c/litellm-1.57.4-py3-none-any.whl", hash = "sha256:afe48924d8a36db801018970a101622fce33d117fe9c54441c0095c491511abb", size = 6592126 },
 ]
 
 [[package]]
@@ -2404,7 +2407,7 @@ wheels = [
 
 [[package]]
 name = "openai"
-version = "1.54.5"
+version = "1.59.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -2416,9 +2419,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/86/29/d480df62c061ce065d33976b263806bad334597c178948e69907db256a77/openai-1.54.5.tar.gz", hash = "sha256:2aab4f9755a3e1e04d8a45ac1f4ce7b6948bab76646020c6386256d7e5cbb7e0", size = 313838 }
+sdist = { url = "https://files.pythonhosted.org/packages/ec/2d/04faa92bac0341649223398503db4415d2f658a757d9d32bb68f3378ddd0/openai-1.59.9.tar.gz", hash = "sha256:ec1a20b0351b4c3e65c6292db71d8233515437c6065efd4fd50edeb55df5f5d2", size = 347134 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/30/90/7f6621a79de8b32f120e9790441c24dd9afafb2f1ca41fd3b9f4faaf8f9f/openai-1.54.5-py3-none-any.whl", hash = "sha256:f55a4450f38501814b53e76311ed7845a6f7f35bab46d0fb2a3728035d7a72d8", size = 389475 },
+    { url = "https://files.pythonhosted.org/packages/07/b4/57f1954a4560092ad8c45f07ad183eab9c8e093e0a1db829f9b506b2d5d1/openai-1.59.9-py3-none-any.whl", hash = "sha256:61a0608a1313c08ddf92fe793b6dbd1630675a1fe3866b2f96447ce30050c448", size = 455527 },
 ]
 
 [[package]]
@@ -2868,7 +2871,7 @@ name = "portalocker"
 version = "2.10.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pywin32", marker = "platform_system == 'Windows'" },
+    { name = "pywin32", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ed/d3/c6c64067759e87af98cc668c1cc75171347d0f1577fab7ca3749134e3cd4/portalocker-2.10.1.tar.gz", hash = "sha256:ef1bf844e878ab08aee7e40184156e1151f228f103aa5c6bd0724cc330960f8f", size = 40891 }
 wheels = [
@@ -4205,7 +4208,7 @@ name = "tqdm"
 version = "4.67.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "platform_system == 'Windows'" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e8/4f/0153c21dc5779a49a0598c445b1978126b1344bab9ee71e53e44877e14e0/tqdm-4.67.0.tar.gz", hash = "sha256:fe5a6f95e6fe0b9755e9469b77b9c3cf850048224ecaa8293d7d2d31f97d869a", size = 169739 }
 wheels = [
