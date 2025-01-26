@@ -32,13 +32,24 @@ st.logo("https://cdn.prod.website-files.com/66cf2bfc3ed15b02da0ca770/66d07240057
 st.sidebar.title("CrewAI Pull Request Review Agents")
 
 st.sidebar.markdown("""
-This is a page that demonstrates how to use the CrewAI Agent to review a pull request. We have created a set of agents that you can use to review ANY github pull request.
-In the form below, just enter the URL of the Github pull request you want to review.
+**Welcome to automated Code Review with CrewAI Multi-Agent Crew!**  
+Here, you’ll discover how our specialized agents can review **any** GitHub pull request, streamlining your development workflow.
 
-You can see the source code of this Crew [here](https://github.com/crewAIInc/code-review-crew-for-github-pull-request/).
+Simply enter the URL of the pull request in the form below, and let CrewAI do the rest!
 
-If you'd like to deploy this Crew, please [open up an account on app.crewai.com](https://app.crewai.com/), fork the resository, make some changes (if you need to), and deploy the crew to your account!
+If you’d like to explore the underlying code, feel free to check out the [source for this Crew](https://github.com/crewAIInc/code-review-crew-for-github-pull-request/).
+
+Here are some examples of how this Crew reviews our Pull Requests:
+* [crewaiinc/crewai: PR #1947](https://github.com/crewAIInc/crewAI/pull/1947)
+* [crewaiinc/crewai: PR #1923](https://github.com/crewAIInc/crewAI/pull/1923)
+* [crewaiinc/crewai: PR #1773](https://github.com/crewAIInc/crewAI/pull/1773)
+
+**Interested in having this Crew automatically post comments on your GitHub pull requests?**
+
+Simply [open a CrewAI platform account](https://app.crewai.com/), fork the repository, make any necessary changes, and deploy the Crew to your account. It’s quick, easy, and will supercharge your pull request reviews with faster, smarter feedback!
 """)
+
+st.sidebar.link_button("Open a CrewAI platform account", "https://app.crewai.com/", type="primary")
 
 reset_button = st.sidebar.button(
     "Reset this page",
