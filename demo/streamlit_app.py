@@ -27,7 +27,7 @@ if 'result' not in st.session_state:
 if 'button_disabled' not in st.session_state:
     st.session_state.button_disabled = False
 
-st.logo("crewai-logo.png", link="https://www.crewai.com/", size="large")
+st.logo("https://cdn.prod.website-files.com/66cf2bfc3ed15b02da0ca770/66d07240057721394308addd_Logo%20(1).svg", link="https://www.crewai.com/", size="large")
 
 st.sidebar.title("CrewAI Pull Request Review Agents")
 
