@@ -6,8 +6,8 @@ base_url = st.secrets["base_url"]
 bearer_token = st.secrets["bearer_token"]
 
 st.set_page_config(
-    page_title="Pull Request Review Demo",
-    page_icon="🔍",
+    page_title="CrewAI Pull Request Review Agents",
+    page_icon="🦾",
     layout="wide"
 )
 
@@ -27,7 +27,23 @@ if 'result' not in st.session_state:
 if 'button_disabled' not in st.session_state:
     st.session_state.button_disabled = False
 
-st.title("CrewAI Agent: Pull Request Review")
+st.logo("crewai-logo.png", link="https://www.crewai.com/", size="large")
+
+st.sidebar.title("CrewAI Pull Request Review Agents")
+
+st.sidebar.markdown("""
+This is a page that demonstrates how to use the CrewAI Agent to review a pull request. We have created a set of agents that you can use to review ANY github pull request.
+In the form below, just enter the URL of the Github pull request you want to review.
+
+You can see the source code of this Crew [here](https://github.com/crewAIInc/code-review-crew-for-github-pull-request/).
+
+If you'd like to deploy this Crew, please [open up an account on app.crewai.com](https://app.crewai.com/), fork the resository, make some changes (if you need to), and deploy the crew to your account!
+""")
+
+reset_button = st.sidebar.button(
+    "Reset this page",
+    on_click=reset_session_state
+)
 
 def kickoff_callback():
     if not st.session_state.pr_patch_url:
@@ -92,10 +108,6 @@ with st.form(key='pr_form'):
         on_click=kickoff_callback
     )
 
-reset_button = st.button(
-    "Reset",
-    on_click=reset_session_state
-)
 
 # Create a placeholder for the result
 result_placeholder = st.empty()
