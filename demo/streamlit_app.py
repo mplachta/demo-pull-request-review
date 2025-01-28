@@ -37,7 +37,7 @@ Here, you’ll discover how our specialized agents can review **any** GitHub pul
 
 Simply enter the URL of the pull request in the form below, and let CrewAI do the rest!
 
-If you’d like to explore the underlying code, feel free to check out the [source for this Crew](https://github.com/crewAIInc/code-review-crew-for-github-pull-request/).
+If you’d like to explore the underlying code, feel free to check out the [source for this Crew](https://github.com/crewAIInc/demo-pull-request-review).
 
 Here are some examples of how this Crew reviews our Pull Requests:
 * [crewaiinc/crewai: PR #1947](https://github.com/crewAIInc/crewAI/pull/1947)
