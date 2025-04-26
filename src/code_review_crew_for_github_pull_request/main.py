@@ -17,7 +17,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/1927.patch',
+        'pr_patch_url': 'https://github.com/crewAIInc/crewAI/pull/2684.patch',
         'repo_name': 'crewAIInc/crewAI',
         'files_changed': ''
     }
